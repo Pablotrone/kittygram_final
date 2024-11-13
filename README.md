@@ -12,7 +12,7 @@ Kittygram — это социальная сеть для любителей к�
    touch.env
    ```
 4. В этом файле укажите:
-   '''
+   ```
    POSTGRES_DB=<база данных>
    POSTGRES_USER=<имя пользователя>
    POSTGRES_PASSWORD=<пароль>
@@ -22,7 +22,7 @@ Kittygram — это социальная сеть для любителей к�
    SECRET_KEY=<ключ Django>
    DEBUG=<DEBUG True/False>
    ALLOWED_HOSTS=<разрешенные хосты>
-   '''
+   ```
 5. Запустите Docker Compose:
    ```
    sudo docker compose -f docker-compose.yml pull
@@ -34,7 +34,7 @@ Kittygram — это социальная сеть для любителей к�
    sudo docker compose -f docker-compose.yml exec backend python manage.py migrate
    sudo docker compose -f docker-compose.yml exec backend python manage.py collectstatic
    sudo docker compose -f docker-compose.yml exec backend cp -r /app/collected_static/. /backend_static/static/
-   ```
+   ````
    
 ## Автодеплой на GitHub Action
 
@@ -51,6 +51,6 @@ USER - имя пользователя сервера
 ```
 ## Технологический стек 
 
-[Python] [Django] [Django REST Framework] 
-[PostgreSQL]
-[Nginx] [Gunicorn] [Docker] [Docker-compose] [Docker Hub] [GitHub%20Actions]
+`Python` `Django` `Django REST Framework` 
+`PostgreSQL`
+`Nginx` `Gunicorn` `Docker` `Docker-compose` `Docker Hub` `GitHub Actions`

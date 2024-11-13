@@ -1,26 +1,51 @@
-#  Как работать с репозиторием финального задания
+#  Проект KITTYGRAM - это социальная сеть для любителей котиков.
 
-## Что нужно сделать
+Kittygram — это социальная сеть для любителей кошек, где пользователи могут делиться фотографиями своих питомцев и находить новых друзей с общими интересами.
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
+## Как развернуть проект:
 
-## Как проверить работу с помощью автотестов
+1. Скачайте файл docker-compose.yml из репозитория по ссылке https://github.com/Pablotrone/kittygram_final/blob/main/docker-compose.yml;
+2. В корневой директории проекта создайте файл .env (переменные окружения)
+   (nano .env или touch.env);
+3. В этом файле укажите:
+   POSTGRES_DB=<база данных>
+   POSTGRES_USER=<имя пользователя>
+   POSTGRES_PASSWORD=<пароль>
+   DB_NAME=<имя базы данных>
+   DB_HOST=db
+   DB_PORT=5432
+   SECRET_KEY=<ключ Django>
+   DEBUG=<DEBUG True/False>
+   ALLOWED_HOSTS=<разрешенные хосты>
+4. Запустите Docker Compose:
+   sudo docker compose -f docker-compose.yml pull
+   sudo docker compose -f docker-compose.yml down
+   sudo docker compose -f docker-compose.yml up -d
+5. Сделайте миграции и соберите статику:
+   sudo docker compose -f docker-compose.yml exec backend python manage.py migrate
+   sudo docker compose -f docker-compose.yml exec backend python manage.py collectstatic
+   sudo docker compose -f docker-compose.yml exec backend cp -r /app/collected_static/. /backend_static/static/
+   
+## Автодеплой на GitHub Action
 
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
-```
+Добавьте перменные в GitHub Actions/Secrets:
 
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
+DOCKER_PASSWORD - пароль от Docker Hub
+DOCKER_USERNAME - имя пользователя Docker Hub
+HOST - ip сервера
+SSH_KEY - ключ ssh для доступа к удаленному серверу
+SSH_PASSPHRASE - пароль ssh
+TELEGRAM_TO - id пользователя TELEGRAM
+TELEGRAM_TOKEN - TELEGRAM токен
+USER - имя пользователя сервера
 
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
+## Технологический стек
 
-## Чек-лист для проверки перед отправкой задания
+Python Django Django REST Framework 
+PostgreSQL 
+Nginx gunicorn Docker Docker-compose Docker Hub GitHub%20Actions
 
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+## Автор:
+## Paul Tsupko https://github.com/Pablotrone
+
+

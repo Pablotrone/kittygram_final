@@ -4,10 +4,11 @@ Kittygram — это социальная сеть для любителей к�
 
 ## Как развернуть проект:
 
-1. Скачайте файл docker-compose.yml из репозитория по ссылке https://github.com/Pablotrone/kittygram_final/blob/main/docker-compose.yml;
+1. Скачайте файл docker-compose.yml из репозитория по [ссылке](https://github.com/Pablotrone/kittygram_final/blob/main/docker-compose.yml);
 2. В корневой директории проекта создайте файл .env (переменные окружения)
    (nano .env или touch.env);
 3. В этом файле укажите:
+   '''
    POSTGRES_DB=<база данных>
    POSTGRES_USER=<имя пользователя>
    POSTGRES_PASSWORD=<пароль>
@@ -17,11 +18,12 @@ Kittygram — это социальная сеть для любителей к�
    SECRET_KEY=<ключ Django>
    DEBUG=<DEBUG True/False>
    ALLOWED_HOSTS=<разрешенные хосты>
-4. Запустите Docker Compose:
+   '''
+5. Запустите Docker Compose:
    sudo docker compose -f docker-compose.yml pull
    sudo docker compose -f docker-compose.yml down
    sudo docker compose -f docker-compose.yml up -d
-5. Сделайте миграции и соберите статику:
+6. Сделайте миграции и соберите статику:
    sudo docker compose -f docker-compose.yml exec backend python manage.py migrate
    sudo docker compose -f docker-compose.yml exec backend python manage.py collectstatic
    sudo docker compose -f docker-compose.yml exec backend cp -r /app/collected_static/. /backend_static/static/
